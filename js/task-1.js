@@ -1,24 +1,31 @@
-// Write code under this line
-const addIndex = (element, index) => (element += index);
-// Write code under this line
-const subIndex = (element, index) => (element -= index);
+console.log('Task-1 Hello');
+// Напиши скрипт, который выполнит следующие операции.
 
-function mapArray(array, cb) {
-  'use strict';
-  // Write code under this line
-  const numbers = [];
-  for (let i = 0; i < array.length; i += 1) {
-    const element = array[i];
-    const index = i;
-    numbers[i] = cb(element, index);
-  }
-  return numbers;
-}
+// Посчитает и выведет в консоль количество категорий в ul#categories, то есть элементов li.item. Получится 'В списке 3 категории.'.
 
-const arr = [1, 2, 3, 4, 5];
+// Для каждого элемента li.item в списке ul#categories, найдет и выведет в консоль текст заголовка элемента (тега h2) 
+// и количество элементов в категории (всех вложенных в него элементов li).
 
-console.log(mapArray(arr, addIndex));
-[1, 3, 5, 7, 9];
+// Например для первой категории получится:
 
-console.log(mapArray(arr, subIndex));
-[1, 1, 1, 1, 1];
+// Категория: Животные
+// Количество элементов: 4
+
+const listReference = document.querySelector('ul#categories')
+
+const listContent = listRef => {
+    const amountOfICategories =  listRef.children.length;
+    console.log(`В списке ${amountOfICategories} категории.`);
+
+    const categoriesList = [...listRef.children]
+
+    categoriesList.forEach(item => {
+    const categoryTitle = item.querySelector('ul#categories h2').textContent;
+    console.log('Категория: ', categoryTitle);
+    
+    const categoryLength = item.querySelectorAll('ul#categories li').length;
+    console.log('Количество элементов: ', categoryLength);
+    })
+};
+
+listContent(listReference);

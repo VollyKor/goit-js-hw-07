@@ -1,0 +1,21 @@
+.gallery{
+
+    &-list {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        
+    }
+
+    &-item{
+        background-color: teal;
+        margin: 10px 30px;
+    }
+    &-img{
+        display: block;
+        max-width: 400px;
+        max-height: 100%;
+    }
+    }
