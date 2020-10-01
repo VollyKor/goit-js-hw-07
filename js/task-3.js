@@ -33,8 +33,6 @@ const imagesArray = newImagesArray.map(obj => {
         // image.setAttribute('width', '400px')
 
         imageItem.appendChild(image);
-        console.log(imageItem);
-
         return imageItem;
     }) 
 
