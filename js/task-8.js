@@ -7,10 +7,23 @@
 // Функция создает столько div, сколько указано в amount и добавляет их в div#boxes.
 
 // Каждый созданный div:
-
 // Имеет случайный rgb цвет фона
 // Размеры самого первого div - 30px на 30px
 // Каждый следующий div после первого, должен быть шире и выше предыдущего на 10px
+
+
+const boxesRootRef = document.querySelector('#boxes');
+const createBtnRef = document.querySelector('button[data-action="render"]');
+const destroyBtnRef = document.querySelector('button[data-action="destroy"]');
+const inputRef = document.querySelector('#controls input');
+
+createBtnRef.addEventListener('click', () => {createBoxes(amountOfBoxes)});
+destroyBtnRef.addEventListener('click', destroyBoxes);
+
+let amountOfBoxes = 0
+inputRef.addEventListener('input', () => {
+  amountOfBoxes = Number(inputRef.value);
+})
 
 function random_bg_color(element) {
   const x = Math.floor(Math.random() * 256);
@@ -22,49 +35,26 @@ function random_bg_color(element) {
   element.style.backgroundColor = bgColor;
 }
 
-const boxesRootRef = document.querySelector('#boxes');
-const createBtnRef = document.querySelector('button[data-action="render"]');
-const destroyBtnRef = document.querySelector('button[data-action="destroy"]');
-const inputRef = document.querySelector('#controls input');
+function createBoxes (amountOfBoxes) {
+  const arrayOfBoxes = []
 
-let amountOfBoxes;
-
-inputRef.addEventListener('input', () => {
-  amountOfBoxes = Number(inputRef.value);
-  return amountOfBoxes;
-});
-
-createBtnRef.addEventListener('click', () => {
   for (let i = 0; i < amountOfBoxes; i += 1) {
     const newBox = document.createElement('div');
-    newBox.style.width = '30px';
-    newBox.style.height = '30px';
+    newBox.style.width =  `${30 + i * 5 }px`;
+    newBox.style.height = `${30 + i * 5 }px`;
     random_bg_color(newBox);
-    boxesRootRef.appendChild(newBox);
+    arrayOfBoxes.push(newBox);
   }
-});
+  boxesRootRef.append(...arrayOfBoxes)
+}
 
-// createBtnRef.addEventListener('click', createBoxes(amountOfBoxes));
-// inputRef.addEventListener('input', () => {
-//   const inputValue = Number(inputRef.value);
-//   console.log(inputValue);
-//   createBtnRef.addEventListener('click', createBoxes(inputValue));
-// });
+function destroyBoxes() {
+  const boxesArray = Array.from(boxesRootRef.childNodes);
+  boxesArray.map(box => boxesRootRef.removeChild(box))
+}
 
-// function createBoxes(amount) {
-//   const basicSizeValue = 30;
-//   const boxesArray = [];
-//   boxesArray.length = amount;
 
-//   const newBoxesArray = boxesArray.reduce((acc, currentBox, amount, array) => {
-//     currentBox = document.createElement('div');
-//     currentBox.setAttribute('width', `${acc}px`);
-//     currentBox.setAttribute('height', `${acc}px`);
-//     acc += 5;
-//     random_bg_color(currentBox);
-//   }, basicSizeValue);
 
-//   console.dir(newBoxesArray);
 
-//   //   boxesRootRef.appendChild(...newBoxesArray);
-// }
+
+
