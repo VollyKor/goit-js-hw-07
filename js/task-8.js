@@ -11,19 +11,19 @@
 // Размеры самого первого div - 30px на 30px
 // Каждый следующий div после первого, должен быть шире и выше предыдущего на 10px
 
-
 const boxesRootRef = document.querySelector('#boxes');
 const createBtnRef = document.querySelector('button[data-action="render"]');
 const destroyBtnRef = document.querySelector('button[data-action="destroy"]');
 const inputRef = document.querySelector('#controls input');
 
-createBtnRef.addEventListener('click', () => {createBoxes(amountOfBoxes)});
+inputRef.addEventListener('input', getAmountOfBoxes);
+createBtnRef.addEventListener('click', () => createBoxes(getAmountOfBoxes()));
 destroyBtnRef.addEventListener('click', destroyBoxes);
 
-let amountOfBoxes = 0
-inputRef.addEventListener('input', () => {
-  amountOfBoxes = Number(inputRef.value);
-})
+function getAmountOfBoxes() {
+  // let amountOfBoxes = 0;
+  return Number(inputRef.value);
+}
 
 function random_bg_color(element) {
   const x = Math.floor(Math.random() * 256);
@@ -35,26 +35,26 @@ function random_bg_color(element) {
   element.style.backgroundColor = bgColor;
 }
 
-function createBoxes (amountOfBoxes) {
-  const arrayOfBoxes = []
+function createBoxes(amountOfBoxes) {
+  const arrayOfBoxes = [];
 
   for (let i = 0; i < amountOfBoxes; i += 1) {
     const newBox = document.createElement('div');
-    newBox.style.width =  `${30 + i * 5 }px`;
-    newBox.style.height = `${30 + i * 5 }px`;
+    newBox.style.width = `${getBoxSize() + i * 5}px`;
+    newBox.style.height = `${getBoxSize() + i * 5}px`;
     random_bg_color(newBox);
     arrayOfBoxes.push(newBox);
   }
-  boxesRootRef.append(...arrayOfBoxes)
+  boxesRootRef.append(...arrayOfBoxes);
 }
 
 function destroyBoxes() {
   const boxesArray = Array.from(boxesRootRef.childNodes);
-  boxesArray.map(box => boxesRootRef.removeChild(box))
+  boxesArray.map(box => boxesRootRef.removeChild(box));
 }
 
-
-
-
-
-
+function getBoxSize() {
+  const baseSize = 30;
+  const count = boxesRootRef.childElementCount;
+  return count === 0 ? baseSize : baseSize + 5 * count;
+}

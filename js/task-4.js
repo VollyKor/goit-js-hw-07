@@ -4,7 +4,7 @@ const btnIncrementRef = document.querySelector(
 const btnDecrementRef = document.querySelector(
   'button[data-action="decrement"]',
 );
-const valueData = document.querySelector('span#value');
+const value = document.querySelector('span#value');
 
 //var1
 // btnIncrementRef.addEventListener('click', addIncrement);
@@ -20,8 +20,8 @@ const valueData = document.querySelector('span#value');
 
 //var2
 btnIncrementRef.addEventListener('click', () => {
-  valueData.textContent = Number(valueData.textContent) + 1;
+  value.textContent = Number(value.textContent) + 1;
 });
 btnDecrementRef.addEventListener('click', () => {
-  valueData.textContent = Number(valueData.textContent) - 1;
+  value.textContent = Number(value.textContent) - 1;
 });
