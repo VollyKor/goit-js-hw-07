@@ -49,8 +49,10 @@ function createBoxes(amountOfBoxes) {
 }
 
 function destroyBoxes() {
-  const boxesArray = Array.from(boxesRootRef.childNodes);
-  boxesArray.map(box => boxesRootRef.removeChild(box));
+  // Плохой вариант
+  // const boxesArray = Array.from(boxesRootRef.childNodes);
+  // boxesArray.map(box => boxesRootRef.removeChild(box));
+  boxesRootRef.innerHTML=''
 }
 
 function getBoxSize() {

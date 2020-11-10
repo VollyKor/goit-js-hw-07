@@ -6,7 +6,10 @@ const inputRef = document.querySelector('input#name-input');
 const titleRef = document.querySelector('span#name-output');
 
 inputRef.addEventListener('input', ({ target }) => {
-  target.value === ''
-    ? (titleRef.textContent = ' Незнакомец')
-    : (titleRef.textContent = target.value);
+  // плохой вариант
+  // target.value === ''
+  //   ? (titleRef.textContent = ' Незнакомец')
+  //   : (titleRef.textContent = target.value);
+
+  titleRef.textContent = target.value === '' ? ' Незнакомец' : target.value
 });
